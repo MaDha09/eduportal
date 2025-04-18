@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+
+
+  /* Nav */ 
+
+  .LogNav{
+        height: 15vh;
+        width: 100%;
+        background-color: aquamarine;
+  }
+
+  .LogBody{
+        height: 85vh;
+        width: 100%;
+        display: flex;
+  }
+
+        .LogBody1{
+            height: 100%;
+            width: 50%;
+            background-color: bisque;
+        }
+        .LogBody2{
+            height: 100%;
+            width: 50%;
+            background-color: antiquewhite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
