@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { setSessionUser } from "../../../utilities/SessionHandler";
+import { getSessionUser } from "../../../utilities/SessionHandler";
+
 
 import { supabase } from "../../../js/supabaseClient";
 
@@ -12,6 +16,7 @@ function LogForm() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
+    const navigate = useNavigate();
   
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -31,7 +36,10 @@ function LogForm() {
           } else {
             alert("Success");
             setSuccess("Login successful!");
-            console.log("User found:", data);
+
+            setSessionUser(data.admin_username);
+            console.log("Stored session username:", getSessionUser());
+            navigate("/dashboard");   
           }
         } catch (err) {
           setError("Something went wrong.");
