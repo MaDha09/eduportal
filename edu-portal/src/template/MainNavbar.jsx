@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "../css/templates/mainNav.css";
 
+import logo from "../assets/image/eduportal1.png";
+
 function MainNavbar(){
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -10,7 +12,9 @@ function MainNavbar(){
 
   return (
     <>
-      <div className="logoNav"></div>
+      <div className="logoNav">
+        <img src={logo}/>
+      </div>
 
       <div className={`menuOff ${menuOpen ? 'active' : ''}`}>
         <ul>

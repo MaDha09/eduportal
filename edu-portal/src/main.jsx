@@ -6,9 +6,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 
-import Dashboard from './main pages/Dashboard';
-import Login from './main pages/LogIn';
-import Profile from './main pages/Profile';
+import Dashboard from './mainpages/Dashboard';
+import Login from './mainpages/Login';
+import Profile from './mainpages/Profile';
 
 const router = createBrowserRouter([
   {

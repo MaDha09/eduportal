@@ -9,7 +9,7 @@ import { supabase } from "../../../js/supabaseClient";
 import { FaUser } from 'react-icons/fa';
 import { RiLockPasswordFill } from "react-icons/ri";
 
-import "../../../css/main css/login/subpages/LogForm.css";
+import "../../../css/maincss/login/subpages/LogForm.css";
 
 function LogForm() {
     const [username, setUsername] = useState('');

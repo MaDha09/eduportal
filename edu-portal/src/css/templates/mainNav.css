@@ -1,9 +1,17 @@
 .logoNav{
     height: 100%;
-    width: 20%;
-    background-color: bisque;
-    border-bottom: 1px black solid;
+    width: 18%;
+    background-color: aqua;
+    box-shadow: 0 4px 12px -1px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    z-index: 3000;
 }
+
+    img{
+        height: 100%;
+        width: 70%;
+    }
 
 .menuOff {
     background-color: black;
@@ -65,8 +73,8 @@
             transition: 0.3s ease;
         }
         .menuNav span:nth-child(1) {
-            top: 25%;
+            top: 30%;
         }
         .menuNav span:nth-child(3){
-            top: 75%;
+            top: 70%;
         }

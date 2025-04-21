@@ -1,9 +1,9 @@
 import React from "react";
 
 import LogNav from "../template/LogNav";
-import LogForm from "./sub pages/Login/LogForm";
+import LogForm from "./subpages/Login/LogForm";
 
-import '../css/main css/login/Login.css';
+import '../css/maincss/login/Login.css';
 
 function Login(){
     return(
