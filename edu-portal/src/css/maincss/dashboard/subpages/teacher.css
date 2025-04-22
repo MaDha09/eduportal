@@ -1,0 +1,50 @@
+.teacherRow1{
+    height: 15%;
+    width: 100%;
+    background-color: rgb(158, 73, 237);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+            .teacherRow1 input{
+                width: 50%;
+            }
+.teacherRow2{
+    height: 85%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: aqua;
+}
+            .teacherProfile{
+                height: 90%;
+                width: 90%;
+                background-color: aquamarine;
+            }
+            .nameList{
+                height: 90%;
+                width: 100%;
+                background-color: aliceblue;
+                display: flex;
+                flex-direction: column;
+            }
+            .nameList ul{
+                height: 100%;
+                width: 100%;
+                padding: 0;
+                margin: 0;    
+            }
+            .lastName{
+                width: 100%;
+                border: 1px black solid;
+                list-style: none;
+                height: 10%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 1px;
+            }
+            .text-muted{
+                list-style: none;
+            }
