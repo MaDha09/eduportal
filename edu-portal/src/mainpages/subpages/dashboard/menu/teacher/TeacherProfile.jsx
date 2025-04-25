@@ -16,8 +16,8 @@ function TeacherProfile({ searchQuery, onSelectLastname }) {
       });
   }, []);
 
-  const filtered = teachers.filter(t =>
-    t.lastname.toLowerCase().includes(searchQuery.toLowerCase())
+  const filtered = teachers.filter(s =>
+    s.lastname.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
