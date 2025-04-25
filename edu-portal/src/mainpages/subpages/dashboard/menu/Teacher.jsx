@@ -1,4 +1,3 @@
-// Teacher.jsx
 import React, { useState } from "react";
 import Searchbar from "./teacher/Searchbar";
 import TeacherProfile from "./teacher/TeacherProfile";

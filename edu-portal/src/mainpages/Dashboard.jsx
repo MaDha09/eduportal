@@ -9,6 +9,7 @@ import Teacher from "../mainpages/subpages/dashboard/menu/Teacher";
 import Student from "../mainpages/subpages/dashboard/menu/Student";
 import TeacherDisplay from "./subpages/dashboard/menu/teacher/TeacherDisplay.jsx";
 import StudentDisplay from "./subpages/dashboard/menu/student/StudentDisplay.jsx";
+import ParentDisplay from "./subpages/dashboard/menu/parent/ParentDisplay.jsx";
 
 import "../css/maincss/dashboard/dashboard.css";
 
@@ -75,6 +76,10 @@ function Dashboard() {
 
             {selectedPage === "Student" && (
             <StudentDisplay />
+            )}
+
+            {selectedPage === "Parent" && (
+            <ParentDisplay />
             )}
                     </div>
         </div>
