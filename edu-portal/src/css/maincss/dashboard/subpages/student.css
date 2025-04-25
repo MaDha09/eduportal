@@ -1,0 +1,14 @@
+.tab{
+    height: 8%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+    .studentTab{
+        flex: 1 1 auto;  
+        min-width: 100px; 
+        padding: 10px 15px;      /* Add padding for better tap area */
+        box-sizing: border-box;
+    }

@@ -29,13 +29,13 @@
 
                           .teacherList{
                             height: 100%;
-                            width: 40%;
+                            width: 30%;
                             background-color: blanchedalmond;
                             display: flex;
                             flex-direction: column;
                           }
                           .teacherInfo{
                             height: 100%;
-                            width: 60%;
+                            width: 70%;
                             background-color: grey;
                           }
