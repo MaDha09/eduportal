@@ -7,9 +7,16 @@ import Sidebar from "./subpages/dashboard/Sidebar";
 import Parent from "../mainpages/subpages/dashboard/menu/Parent";
 import Teacher from "../mainpages/subpages/dashboard/menu/Teacher";
 import Student from "../mainpages/subpages/dashboard/menu/Student";
+import Subjects from "./subpages/dashboard/menu/Subjects.jsx";
+import Profile from "./subpages/dashboard/menu/Profile.jsx";
+import SchoolForm from "./subpages/dashboard/menu/SchoolForm.jsx";
+
 import TeacherDisplay from "./subpages/dashboard/menu/teacher/TeacherDisplay";
 import StudentDisplay from "./subpages/dashboard/menu/student/StudentDisplay";
 import ParentDisplay from "./subpages/dashboard/menu/parent/ParentDisplay";
+import SubjectDisplay from "./subpages/dashboard/menu/subject/SubjectDisplay.jsx";
+import ProfileDisplay from "./subpages/dashboard/menu/profile/ProfileDisplay.jsx";
+import SchoolFormDisplay from "./subpages/dashboard/menu/schoolform/SchoolFormDisplay.jsx";
 
 // Correct CSS import
 import "../css/maincss/dashboard/dashboard.css";
@@ -24,6 +31,18 @@ function Dashboard() {
 
   const [clickedParent, setClickedParent] = useState(null);
   const [parentDetails, setParentDetails] = useState(null);
+
+  const [clickedSubjects, setClickedSubjects] = useState(null);
+  const [subjectsDetails, setSubjectsDetails] = useState(null);
+
+  const [clickedSchoolForm, setClickedSchoolForm] = useState(null);
+  const [schoolformtDetails, setSchoolFormDetails] = useState(null);
+
+  const [clickedProfile, setClickedProfile] = useState(null);
+  const [profileDetails, setProfileDetails] = useState(null);
+
+  const [clickedLogout, setClickedLogout] = useState(null);
+  const [logoutDetails, setLogoutDetails] = useState(null);
 
   // Fetch teacher details when a teacher's lastname is clicked
   useEffect(() => {
@@ -79,6 +98,57 @@ function Dashboard() {
       });
   }, [clickedParent]);
 
+  useEffect(() => {
+    if (!clickedSubjects) {
+      setSubjectsDetails(null);
+      return;
+    }
+  
+    supabase
+      .from("parentInfo")
+      .select("*")
+      .eq("lastname", clickedParent)
+      .single()
+      .then(({ data, error }) => {
+        if (error) console.error("Parent detail fetch error:", error);
+        else setSubjectsDetails(data);
+      });
+  }, [clickedSubjects]);
+
+  useEffect(() => {
+    if (!clickedSchoolForm) {
+      setClickedSchoolForm(null);
+      return;
+    }
+  
+    supabase
+      .from("parentInfo")
+      .select("*")
+      .eq("lastname", clickedSchoolForm)
+      .single()
+      .then(({ data, error }) => {
+        if (error) console.error("Parent detail fetch error:", error);
+        else setSchoolFormDetails(data);
+      });
+  }, [clickedSchoolForm]);
+
+  useEffect(() => {
+    if (!clickedProfile) {
+      setProfileDetails(null);
+      return;
+    }
+  
+    supabase
+      .from("parentInfo")
+      .select("*")
+      .eq("lastname", clickedProfile)
+      .single()
+      .then(({ data, error }) => {
+        if (error) console.error("Parent detail fetch error:", error);
+        else setProfileDetails(data);
+      });
+  }, [clickedProfile]);
+
   // Render the appropriate page based on the selected option
   const renderPage = () => {
     switch (selectedPage) {
@@ -87,7 +157,15 @@ function Dashboard() {
       case "Student":
         return <Student setClickedStudent={setClickedStudent} />;
       case "Parent":
-        return <Parent setClickedParent={setClickedParent} />;
+      return <Parent setClickedParent={setClickedParent} />;
+      case "Subject":
+      return <Subjects setClickedSubjects={setClickedSubjects} />;
+      case "SchoolForm":
+      return <SchoolForm setClickedSchoolForm={setClickedSchoolForm} />;
+      case "Profile":
+      return <Profile setClickedProfile={setClickedProfile} />;
+      case "Logout":
+        return <Parent setClickedLogout={setClickedLogout} />;
       default:
         return <div>Select a page</div>;
     }
@@ -128,6 +206,27 @@ function Dashboard() {
               <ParentDisplay
                 parentDetails={parentDetails}
                 clickedParent={clickedParent}
+              />
+            )}
+
+            {selectedPage === "Subject" && (
+              <SubjectDisplay
+                subjectsDetails={subjectsDetails}
+                clickedSubjects={clickedSubjects}
+              />
+            )}
+            
+            {selectedPage === "SchoolForm" && (
+              <SchoolFormDisplay
+                schoolformtDetails={schoolformtDetails}
+                clickedSchoolForm={clickedSchoolForm}
+              />
+            )}
+
+            {selectedPage === "Profile" && (
+              <ProfileDisplay
+                profileDetails={profileDetails}
+                clickedProfile={clickedProfile}
               />
             )}
           </div>

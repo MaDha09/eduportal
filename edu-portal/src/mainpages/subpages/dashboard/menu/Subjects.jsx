@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import Searchbar from "./teacher/Searchbar";
 
-import ParentInfo from "./parent/ParentInfo";
-
-function Parent({ setClickedParent }) {
+import SubjectInfo from "./subject/SubjectInfo.jsx";
+function Subjects({ setClickedSubjects }) {
     const [searchQuery, setSearchQuery] = useState("");
   
     return (
@@ -13,9 +12,9 @@ function Parent({ setClickedParent }) {
         </div>
         <div className="teacherRow2">
           <div className="teacherProfile">
-                <ParentInfo
+                <SubjectInfo
                     searchQuery={searchQuery}
-                    setClickedStudent={setClickedParent}
+                    setClickedStudent={setClickedSubjects}
                 />
           </div>
         </div>
@@ -23,4 +22,4 @@ function Parent({ setClickedParent }) {
     );
   }
 
-export default Parent;
+export default Subjects;
