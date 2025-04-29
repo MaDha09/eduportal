@@ -30,6 +30,8 @@ function Dashboard() {
   const [clickedStudent, setClickedStudent] = useState(null);
   const [studentDetails, setStudentDetails] = useState(null);
   const [studentGrades, setStudentGrades] = useState([]);
+  const [sectionDetails, setSectionDetails] = useState(null);
+  const [studentAttendance, setStudentAttendance] = useState(null);
 
   const [clickedParent, setClickedParent] = useState(null);
   const [parentDetails, setParentDetails] = useState(null);
@@ -93,19 +95,28 @@ function Dashboard() {
       return;
     }
   
-    supabase
+        supabase
       .from("students")
       .select(`
-        *, 
-        sf1_register (*)
+        *,
+        sf1_register (*),
+        health_info (*),
+        sf10_permanent_record (*),
+        movement (
+          *,
+          department_from:departments!movement_department_from_fkey (*),
+          department_to:departments!movement_department_to_fkey (*)
+        )
       `)
       .eq("last_name", clickedStudent)
       .single()
       .then(({ data, error }) => {
         if (error) console.error("Student detail fetch error:", error);
-        else setStudentDetails(data);  // Ensure data is set with nested table data
+        else setStudentDetails(data);
       });
+
   }, [clickedStudent]);
+  
   
 
   useEffect(() => {
@@ -114,15 +125,69 @@ function Dashboard() {
       return;
     }
   
+      supabase
+        .from("grades")
+        .select(`
+          grade,
+          grading_period,
+          subject_id,
+          subjects (
+            subject_name
+          )
+        `)
+        .eq("student_id", studentDetails.student_id)
+        .then(({ data, error }) => {
+          if (error) {
+            console.error("Grades fetch error:", error);
+          } else {
+            console.log("Fetched grades with subjects:", data);
+            setStudentGrades(data);
+          }
+        });
+    }, [studentDetails]);
+
+    useEffect(() => {
+      if (!studentDetails) {
+        setStudentAttendance(null);
+        return;
+      }
+    
+      supabase
+        .from("attendance")
+        .select("*")
+        .eq("student_id", studentDetails.student_id)
+        .then(({ data, error }) => {
+          if (error) {
+            console.error("Attendance fetch error:", error);
+          } else {
+            console.log("Fetched attendance data:", data);  // 👈 Add this
+            setStudentAttendance(data);
+          }
+        });
+    }, [studentDetails]);
+    
+    
+  
+
+  useEffect(() => {
+    if (!studentDetails) {
+      setSectionDetails(null); // Clear the section data if there's no student details
+      return;
+    }
+  
     supabase
-      .from("grades")
-      .select("*")
-      .eq("student_id", studentDetails.student_id)
+      .from("sf1_register")  
+      .select("*")  
+      .eq("student_id", studentDetails.student_id) 
       .then(({ data, error }) => {
-        if (error) console.error("Grades fetch error:", error);
-        else setStudentGrades(data);
+        if (error) {
+          console.error("Section fetch error:", error);
+        } else {
+          setSectionDetails(data);  
+        }
       });
-  }, [studentDetails]);
+  }, [studentDetails]); 
+  
 
   // Fetch parent details when a parent's lastname is clicked
   useEffect(() => {
@@ -245,6 +310,8 @@ function Dashboard() {
                 studentDetails={studentDetails}
                 clickedStudent={clickedStudent}
                 studentGrades={studentGrades}
+                sectionDetails={sectionDetails} 
+                studentAttendance={studentAttendance}
               />
             )}
 
