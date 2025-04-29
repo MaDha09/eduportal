@@ -6,8 +6,8 @@ function StudentProfile({ searchQuery, setClickedStudent }) {
 
   useEffect(() => {
     supabase
-      .from("student")
-      .select("lastname")
+      .from("students")
+      .select("last_name")
       .then(({ data, error }) => {
         if (error) {
           console.error("Error fetching students:", error);
@@ -19,7 +19,7 @@ function StudentProfile({ searchQuery, setClickedStudent }) {
 
   // Filter students based on the search query
   const filtered = students.filter(student =>
-    student.lastname?.toLowerCase().includes(searchQuery?.toLowerCase() || "")
+    student.last_name?.toLowerCase().includes(searchQuery?.toLowerCase() || "")
   );
 
   return (
@@ -32,11 +32,11 @@ function StudentProfile({ searchQuery, setClickedStudent }) {
              key={i}
              className="lastName w-full cursor-pointer p-2 border-b"
              onClick={() => {
-                console.log("Clicked student:", student.lastname);
-                setClickedStudent(student.lastname);
+                console.log("Clicked student:", student.last_name);
+                setClickedStudent(student.last_name);
               }}
            >
-             {student.lastname}
+             {student.last_name}
            </li>
           ))}
           {!filtered.length && (

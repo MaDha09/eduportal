@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import TeacherPersonal from "./TeacherPersonal";
 import TeacherAssignments from "./TeacherAssignments";
 
-function TeacherDisplay({ teacherDetails, clickedLastname }) {
+function TeacherDisplay({ teacherDetails, clickedLastname, teacherAssignments }) {
 
   const [activeTab, setActiveTab] = useState("Profile");
   // 1) Nothing selected yet
@@ -34,7 +34,7 @@ function TeacherDisplay({ teacherDetails, clickedLastname }) {
       </div>
       <div className="mt-3">
         {activeTab === "Profile" && <TeacherPersonal teacher={teacherDetails} />}
-        {activeTab === "Assignments" && <TeacherAssignments teacher={teacherDetails} />}
+        {activeTab === "Assignments" && <TeacherAssignments assignments={teacherAssignments} />}
       </div>
     </>
   );

@@ -25,9 +25,11 @@ function Dashboard() {
   const [selectedPage, setSelectedPage] = useState("Teacher");
   const [clickedLastname, setClickedLastname] = useState(null);
   const [teacherDetails, setTeacherDetails] = useState(null);
+  const [teacherAssignments, setTeacherAssignments] = useState([]);
 
   const [clickedStudent, setClickedStudent] = useState(null);
   const [studentDetails, setStudentDetails] = useState(null);
+  const [studentGrades, setStudentGrades] = useState([]);
 
   const [clickedParent, setClickedParent] = useState(null);
   const [parentDetails, setParentDetails] = useState(null);
@@ -52,15 +54,37 @@ function Dashboard() {
     }
 
     supabase
-      .from("teacherInfo")
+      .from("teachers")
       .select("*")
-      .eq("lastname", clickedLastname)
+      .eq("last_name", clickedLastname)
       .single()
       .then(({ data, error }) => {
         if (error) console.error("Detail fetch error:", error);
         else setTeacherDetails(data);
       });
   }, [clickedLastname]);
+
+  useEffect(() => {
+    if (!teacherDetails) {
+      setTeacherAssignments([]);
+      return;
+    }
+  
+    supabase
+      .from("sf7_personnel_assignment")
+      .select("*")
+      .eq("teacher_id", teacherDetails.teacher_id)
+      .then(({ data, error }) => {
+        if (error) {
+          console.error("Assignment fetch error:", error);
+        } else {
+          console.log("Assignments fetched:", data);   // 👈 ADD THIS LINE
+          setTeacherAssignments(data);
+        }
+      });
+  }, [teacherDetails]);
+  
+  
 
   // Fetch student details when a student's lastname is clicked
   useEffect(() => {
@@ -70,15 +94,35 @@ function Dashboard() {
     }
   
     supabase
-      .from("student")
-      .select("*")
-      .eq("lastname", clickedStudent)
+      .from("students")
+      .select(`
+        *, 
+        sf1_register (*)
+      `)
+      .eq("last_name", clickedStudent)
       .single()
       .then(({ data, error }) => {
         if (error) console.error("Student detail fetch error:", error);
-        else setStudentDetails(data);
+        else setStudentDetails(data);  // Ensure data is set with nested table data
       });
   }, [clickedStudent]);
+  
+
+  useEffect(() => {
+    if (!studentDetails) {
+      setStudentGrades([]);
+      return;
+    }
+  
+    supabase
+      .from("grades")
+      .select("*")
+      .eq("student_id", studentDetails.student_id)
+      .then(({ data, error }) => {
+        if (error) console.error("Grades fetch error:", error);
+        else setStudentGrades(data);
+      });
+  }, [studentDetails]);
 
   // Fetch parent details when a parent's lastname is clicked
   useEffect(() => {
@@ -192,6 +236,7 @@ function Dashboard() {
               <TeacherDisplay
                 teacherDetails={teacherDetails}
                 clickedLastname={clickedLastname}
+                teacherAssignments={teacherAssignments}
               />
             )}
 
@@ -199,6 +244,7 @@ function Dashboard() {
               <StudentDisplay
                 studentDetails={studentDetails}
                 clickedStudent={clickedStudent}
+                studentGrades={studentGrades}
               />
             )}
 

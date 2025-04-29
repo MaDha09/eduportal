@@ -11,7 +11,7 @@ import '../../../../../css/maincss/dashboard/subpages/student.css';
 
 
 
-function StudentDisplay({ studentDetails, clickedStudent }) {
+function StudentDisplay({ studentDetails, clickedStudent, studentGrades }) {
 
   const [activeTab, setActiveTab] = useState("Personal");
   // 1) Nothing selected yet
@@ -43,7 +43,7 @@ function StudentDisplay({ studentDetails, clickedStudent }) {
 
       <div className="tabCOn mt-3">
         {activeTab === "Profile" && <StudentPersonal student={studentDetails} />}
-        {activeTab === "Grades" && <StudentGrade student={studentDetails} />}
+        {activeTab === "Grades" && <StudentGrade student={studentDetails} grades={studentGrades} />}
         {activeTab === "Attendance" && <StudentAttendance student={studentDetails} />}
         {activeTab === "Movement" && <StudentMovement student={studentDetails} />}
         {activeTab === "Health" && <StudentHealth student={studentDetails} />}

@@ -3,8 +3,8 @@ import React from "react";
 function StudentPersonal({ student }) {
   return (
     <div>
-      <p><strong>Last name:</strong> {student.lastname}</p>
-      <p><strong>First name:</strong> {student.firstname}</p>
+      <p><strong>Last name:</strong> {student.last_name}</p>
+      <p><strong>First name:</strong> {student.first_name}</p>
       <p><strong>Sex:</strong> {student.sex}</p>
       <p><strong>Birthday:</strong> {student.birthday}</p>
       <p><strong>Email:</strong> {student.email}</p>

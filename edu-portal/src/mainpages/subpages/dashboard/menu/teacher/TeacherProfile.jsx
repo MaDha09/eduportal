@@ -8,8 +8,8 @@ function TeacherProfile({ searchQuery, onSelectLastname }) {
   useEffect(() => {
     // only need lastnames here
     supabase
-      .from("teacherInfo")
-      .select("lastname")
+      .from("teachers")
+      .select("last_name")
       .then(({ data, error }) => {
         if (error) console.error(error);
         else setTeachers(data);
@@ -17,7 +17,7 @@ function TeacherProfile({ searchQuery, onSelectLastname }) {
   }, []);
 
   const filtered = teachers.filter(s =>
-    s.lastname.toLowerCase().includes(searchQuery.toLowerCase())
+    s.last_name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -29,9 +29,9 @@ function TeacherProfile({ searchQuery, onSelectLastname }) {
             <li
               key={i}
               className="lastName w-full cursor-pointer p-2 border-b"
-              onClick={() => onSelectLastname(t.lastname)}   // ← fire the lastname up
+              onClick={() => onSelectLastname(t.last_name)}   // ← fire the lastname up
             >
-              {t.lastname}
+              {t.last_name}
             </li>
           ))}
           {!filtered.length && (
