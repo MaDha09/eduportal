@@ -7,8 +7,8 @@ function ParentInfo({ searchQuery, setClickedParent }) {
   
     useEffect(() => {
       supabase
-        .from("parentInfo")
-        .select("lastname")
+        .from("parents")
+        .select("last_name")
         .then(({ data, error }) => {
           if (error) {
             console.error("Error fetching parents:", error);
@@ -20,7 +20,7 @@ function ParentInfo({ searchQuery, setClickedParent }) {
   
     // Filter parents based on the search query
     const filtered = parents.filter(parent =>
-      parent.lastname?.toLowerCase().includes(searchQuery?.toLowerCase() || "")
+      parent.last_name?.toLowerCase().includes(searchQuery?.toLowerCase() || "")
     );
   
     return (
@@ -33,11 +33,11 @@ function ParentInfo({ searchQuery, setClickedParent }) {
                 key={i}
                 className="lastName w-full cursor-pointer p-2 border-b"
                 onClick={() => {
-                  console.log("Clicked parent:", parent.lastname);
-                  setClickedParent(parent.lastname);
+                  console.log("Clicked parent:", parent.last_name);
+                  setClickedParent(parent.last_name);
                 }}
               >
-                {parent.lastname}
+                {parent.last_name}
               </li>
             ))}
             {!filtered.length && (

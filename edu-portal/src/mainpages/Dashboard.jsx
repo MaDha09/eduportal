@@ -57,7 +57,10 @@ function Dashboard() {
 
     supabase
       .from("teachers")
-      .select("*")
+      .select(`
+        *,
+        departments(department_name)
+      `)  
       .eq("last_name", clickedLastname)
       .single()
       .then(({ data, error }) => {
@@ -197,9 +200,9 @@ function Dashboard() {
     }
   
     supabase
-      .from("parentInfo")
+      .from("parents")
       .select("*")
-      .eq("lastname", clickedParent)
+      .eq("last_name", clickedParent)
       .single()
       .then(({ data, error }) => {
         if (error) console.error("Parent detail fetch error:", error);
@@ -216,7 +219,7 @@ function Dashboard() {
     supabase
       .from("parentInfo")
       .select("*")
-      .eq("lastname", clickedParent)
+      .eq("lastname", clickedSubjects)
       .single()
       .then(({ data, error }) => {
         if (error) console.error("Parent detail fetch error:", error);

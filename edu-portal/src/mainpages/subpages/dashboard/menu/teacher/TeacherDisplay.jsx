@@ -34,7 +34,7 @@ function TeacherDisplay({ teacherDetails, clickedLastname, teacherAssignments })
       </div>
       <div className="mt-3">
         {activeTab === "Profile" && <TeacherPersonal teacher={teacherDetails} />}
-        {activeTab === "Assignments" && <TeacherAssignments assignments={teacherAssignments} />}
+        {activeTab === "Assignments" && <TeacherAssignments assignments={teacherAssignments} teacher={teacherDetails}/>}
       </div>
     </>
   );

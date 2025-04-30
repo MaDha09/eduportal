@@ -15,7 +15,7 @@ function Parent({ setClickedParent }) {
           <div className="teacherProfile">
                 <ParentInfo
                     searchQuery={searchQuery}
-                    setClickedStudent={setClickedParent}
+                    setClickedParent={setClickedParent}
                 />
           </div>
         </div>
