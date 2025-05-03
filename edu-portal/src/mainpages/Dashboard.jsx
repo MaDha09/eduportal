@@ -200,14 +200,21 @@ function Dashboard() {
     }
   
     supabase
-      .from("parents")
-      .select("*")
-      .eq("last_name", clickedParent)
-      .single()
-      .then(({ data, error }) => {
-        if (error) console.error("Parent detail fetch error:", error);
-        else setParentDetails(data);
-      });
+    .from("parents")
+    .select(`
+      *,
+      students:students!students_parent_id_fkey (
+        *,
+        classes:class_id (*)
+      )
+    `)
+    .eq("last_name", clickedParent)
+    .single()
+    .then(({ data, error }) => {
+      if (error) console.error("Parent detail fetch error:", error);
+      else setParentDetails(data);
+      console.log("Parent data fetched:", data);
+    });
   }, [clickedParent]);
 
   useEffect(() => {
